@@ -1,0 +1,10 @@
+﻿Ρerson_Id,Person_Name,Family_Name,Gender,Fathеr_Id,Mother_Id,Spouѕe_Id
+1111,aaaa,AAAA,Male,3333,4444,
+2222,bbbb,BBBB,Female,3333,4444,
+3333,cccc,CCCC,Male,1000,5678,4444
+4444,dddd,DDDD,Female,7777,6666,3333
+5555,eeee,EEEE,Male,2000,4444,
+6666,ffff,FFFF,Female,4000,5000,7777
+7777,gggg,GGGG,Male,6000,7000,
+8888,hhhh,HHHH,Female,9000,8000,
+9999,iiii,IIII,Male,1100,8000,
