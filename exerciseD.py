@@ -2,15 +2,17 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from bson import ObjectId
 
+
+client=MongoClient('mongodb://localhost:27017/')
+db= client['store_db']
+suppliers_collection= db['suppliers']
+orders_collection= db['orders']
+
+
+
+
+
 app = Flask(__name__)
-
-client = MongoClient('mongodb://localhost:27017/')
-db = client['store_db']
-suppliers_collection = db['suppliers']
-orders_collection = db['orders']
-
-
-
 
 
 
@@ -83,7 +85,7 @@ def approve_order(order_id):
         {"_id": ObjectId(order_id)},
         {"$set": {"status": "In Process"}}
     )
-    return jsonify({"Message": "Order status updated to 'In process'"}), 200
+    return jsonify({"Message": "Order in process"}), 200
 
 
 
@@ -110,7 +112,6 @@ def order():
 
 
 
-
 @app.route('/view_orders', methods=['GET'])
 def view_orders():
     orders= orders_collection.find({"status": {"$ne": "Completed"}})
@@ -123,9 +124,7 @@ def view_orders():
             "status": order['status'],
             "products": order['products']
         })
-
     return jsonify(orders_list), 200
-
 
 
 
@@ -138,14 +137,14 @@ def view_orders():
 def complete_order(order_id):
     order= orders_collection.find_one({"_id": ObjectId(order_id)})
     if not order:
-        return jsonify({"Message": "Order not found!"}), 404
+        return jsonify({"Message": "Order not found"}), 404
 
     orders_collection.update_one(
         {"_id": ObjectId(order_id)},
         {"$set": {"status": "Completed"}}
     )
 
-    return jsonify({"Message": "Order status updated to 'Completed'"}), 200
+    return jsonify({"Message": "Order completed"}), 200
 
 
 
